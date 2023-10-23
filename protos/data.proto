@@ -13,14 +13,14 @@ enum Operational_state {
     OP_RUNNING = 3;    
 }
 message Stats {
-    int32 flow_rate = 1;
+    double flow_rate = 1;
     double power_generation = 2;
     Operational_state op_state = 3;
     Error_state error_state = 4;
     string error = 5;
 }
 message Settings {
-    int32 flow_rate = 1;
+    double flow_rate = 1;
     Operational_state desired_state = 2;
     
 }

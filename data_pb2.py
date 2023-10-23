@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\ndata.proto\x12\x0c\x44\x61ta_project\"\xa6\x01\n\x05Stats\x12\x11\n\tflow_rate\x18\x01 \x01(\x05\x12\x18\n\x10power_generation\x18\x02 \x01(\x01\x12\x31\n\x08op_state\x18\x03 \x01(\x0e\x32\x1f.Data_project.Operational_state\x12.\n\x0b\x65rror_state\x18\x04 \x01(\x0e\x32\x19.Data_project.Error_state\x12\r\n\x05\x65rror\x18\x05 \x01(\t\"U\n\x08Settings\x12\x11\n\tflow_rate\x18\x01 \x01(\x05\x12\x36\n\rdesired_state\x18\x02 \x01(\x0e\x32\x1f.Data_project.Operational_state*\\\n\x0b\x45rror_state\x12\x0e\n\nERROR_NONE\x10\x00\x12\x15\n\x11\x45RROR_RECOVERABLE\x10\x01\x12\x0f\n\x0b\x45RROR_FATAL\x10\x02\x12\x15\n\x11\x45RROR_MAINTENENCE\x10\x03*R\n\x11Operational_state\x12\x0f\n\x0bOP_NOTREADY\x10\x00\x12\x0c\n\x08OP_READY\x10\x01\x12\x0e\n\nOP_STANDBY\x10\x02\x12\x0e\n\nOP_RUNNING\x10\x03\x62\x06proto3'
+  serialized_pb=b'\n\ndata.proto\x12\x0c\x44\x61ta_project\"\xa6\x01\n\x05Stats\x12\x11\n\tflow_rate\x18\x01 \x01(\x01\x12\x18\n\x10power_generation\x18\x02 \x01(\x01\x12\x31\n\x08op_state\x18\x03 \x01(\x0e\x32\x1f.Data_project.Operational_state\x12.\n\x0b\x65rror_state\x18\x04 \x01(\x0e\x32\x19.Data_project.Error_state\x12\r\n\x05\x65rror\x18\x05 \x01(\t\"U\n\x08Settings\x12\x11\n\tflow_rate\x18\x01 \x01(\x01\x12\x36\n\rdesired_state\x18\x02 \x01(\x0e\x32\x1f.Data_project.Operational_state*\\\n\x0b\x45rror_state\x12\x0e\n\nERROR_NONE\x10\x00\x12\x15\n\x11\x45RROR_RECOVERABLE\x10\x01\x12\x0f\n\x0b\x45RROR_FATAL\x10\x02\x12\x15\n\x11\x45RROR_MAINTENENCE\x10\x03*R\n\x11Operational_state\x12\x0f\n\x0bOP_NOTREADY\x10\x00\x12\x0c\n\x08OP_READY\x10\x01\x12\x0e\n\nOP_STANDBY\x10\x02\x12\x0e\n\nOP_RUNNING\x10\x03\x62\x06proto3'
 )
 
 _ERROR_STATE = _descriptor.EnumDescriptor(
@@ -116,8 +116,8 @@ _STATS = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='flow_rate', full_name='Data_project.Stats.flow_rate', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=1, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -176,8 +176,8 @@ _SETTINGS = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='flow_rate', full_name='Data_project.Settings.flow_rate', index=0,
-      number=1, type=5, cpp_type=1, label=1,
-      has_default_value=False, default_value=0,
+      number=1, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),

@@ -25,12 +25,17 @@ def settings_handle(client,userdata,message):
     temp_settings.ParseFromString(message.payload)
     #global system_settings
     #system_settings = temp_settings
-    if(system_state.op_state != proto.OP_STANDBY):
-        apply_settings(temp_settings.flow_rate,temp_settings.desired_state)
-    else:
-        print("Configuration command ignored due to unapplyed previous state")
-        simulate_state()
-        publish_state()
+    apply_settings(temp_settings.flow_rate,temp_settings.desired_state)
+    #simulate_state()
+    #publish_state()
+
+    # if(system_state.op_state != proto.OP_STANDBY):
+    #     apply_settings(temp_settings.flow_rate,temp_settings.desired_state)
+    # else:
+    #     print("Configuration command ignored due to unapplyed previous state")
+    #     simulate_state()
+    #     simulate_state()#cycle twice in order to sync state correctly
+    #     publish_state()
 
 
 def publish_handle(client,userdata,message):
@@ -52,12 +57,20 @@ def simulate_state():
             
             if(system_state.flow_rate > 0):
                 system_state.op_state = proto.OP_RUNNING
+                system_state.error_state = proto.ERROR_NONE
             else:
-                system_error = proto.ERROR_RECOVERABLE
-                system_state.flow_rate = 0 #make sure we do not ever go below zero  
+                system_state.error_state = proto.ERROR_RECOVERABLE
+                system_state.op_state = proto.OP_READY
+                #system_state.flow_rate = 0 #make sure we do not ever go below zero  
         case proto.OP_NOTREADY:
             power_generation = 0
+            system_state.error_state = proto.ERROR_MAINTENENCE
         case proto.OP_READY:
+            if(system_state.flow_rate > 0):
+                system_state.op_state = proto.OP_RUNNING
+            else:
+                system_state.flow_rate = 0
+                system_state.error_state = proto.ERROR_RECOVERABLE
             power_generation = 0
         case proto.OP_RUNNING:
             if(system_state.flow_rate >= 100):
