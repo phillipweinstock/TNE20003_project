@@ -1,0 +1,26 @@
+syntax = "proto3";
+package Data_project;
+enum Error_state {
+    ERROR_NONE = 0;
+    ERROR_RECOVERABLE = 1;
+    ERROR_FATAL = 2;
+    ERROR_MAINTENENCE = 3;    
+}
+enum Operational_state {
+    OP_NOTREADY = 0;
+    OP_READY = 1;
+    OP_STANDBY = 2;
+    OP_RUNNING = 3;    
+}
+message Stats {
+    int32 flow_rate = 1;
+    double power_generation = 2;
+    Operational_state op_state = 3;
+    Error_state error_state = 4;
+    string error = 5;
+}
+message Settings {
+    int32 flow_rate = 1;
+    Operational_state desired_state = 2;
+    
+}
