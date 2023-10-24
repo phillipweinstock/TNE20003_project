@@ -51,17 +51,17 @@ def print_output():#Prints our output in a human readable form
 def on_connect(client,userdata,flags,rc):
     print("Connected to Broker \n client_id: %s with response code: %s " %(client_id,rc))
     calc_satisfaction()
-    client.subscribe(f'102101219/+/data')
+    #client.subscribe(f'102101219/+/data')
+    client.subscribe(f'public/+/power_plant/data')
 
 def settings_handle(client,userdata,message):
     print(f'Recieved new configurations: {message.payload.decode()} ')
 
 
 def publish_settings(target):
-    client.publish(f'102101219/{target}/settings',system_settings.SerializeToString())
+    client.publish(f'102101219/{target}/power_plant/settings',system_settings.SerializeToString())
 def calc_adjustment():
     threading.Timer(3,calc_adjustment).start()
-    update_generator = 0
     if len(output_dict) < 1:
         return
     
@@ -112,7 +112,9 @@ def process_stats(client,userdata,message):
 
     
 client.on_connect = on_connect
-client.message_callback_add('102101219/+/data',process_stats)
+#client.message_callback_add('102101219/+/data',process_stats)
+client.message_callback_add('public/+/power_plant/data',process_stats)
+#power_plant
 client.username_pw_set("102101219","102101219")
 client.connect("rule28.i4t.swin.edu.au")
 #default settings

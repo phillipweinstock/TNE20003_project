@@ -16,13 +16,15 @@ system_settings = proto.Settings()
 
 def on_connect(client,userdata,flags,rc):
     print("Connected to Broker \n client_id: %s with response code: %s " %(client_id,rc))
-    client.subscribe(f'102101219/{client_id}/data')
-    client.subscribe(f'102101219/{client_id}/settings')
+    client.subscribe(f'102101219/{client_id}/power_plant/data')
+    #client.subscribe(f'public/{client_id}/power_plant/data')
+    client.subscribe(f'102101219/{client_id}/power_plant/settings')
 
 def settings_handle(client,userdata,message):
     print('Recieved new configuration')
     temp_settings =  proto.Settings()
     temp_settings.ParseFromString(message.payload)
+    print(f'New settings rate: {temp_settings.flow_rate} \n State: {temp_settings.desired_state}')
     #global system_settings
     #system_settings = temp_settings
     apply_settings(temp_settings.flow_rate,temp_settings.desired_state)
@@ -85,11 +87,13 @@ def simulate_state():
     system_state.power_generation = power_generation
 
 def publish_state():
-    client.publish(f'102101219/{client_id}/data',system_state.SerializeToString())
+    client.publish(f'102101219/{client_id}/power_plant/data',system_state.SerializeToString())
+    client.publish(f'public/{client_id}/power_plant/data',system_state.SerializeToString())
 
 client.on_connect = on_connect
-client.message_callback_add(f'102101219/{client_id}/settings',settings_handle)
-client.message_callback_add(f'102101219/{client_id}/data',publish_handle)
+client.message_callback_add(f'102101219/{client_id}/power_plant/settings',settings_handle)
+client.message_callback_add(f'102101219/{client_id}/power_plant/data',publish_handle)#private
+#client.message_callback_add(f'public/{client_id}/power_plant/data',publish_handle) #public
 client.username_pw_set("102101219","102101219")
 client.connect("rule28.i4t.swin.edu.au")
 
