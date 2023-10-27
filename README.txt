@@ -14,7 +14,7 @@ Step 4
 Start PLC system 
 sudo python3 Client_controller.py
 Step 5
-Start as many generators as your heart desired_state
+Start as many generators as your heart desired_state in different terminals
 python3 Client_datagen.python
 Step 6
 Play with power demand with - + hotkeys
