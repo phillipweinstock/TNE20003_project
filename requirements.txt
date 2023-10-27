@@ -3,3 +3,4 @@ protobuf
 setuptools
 shortuuid
 keyboard
+cryptography

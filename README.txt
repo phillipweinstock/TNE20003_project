@@ -1,5 +1,8 @@
 Step 1
-run pip -r requirements.txt
+run 
+pip -r requirements.txt
+or 
+python3 -m pip install -r requirements.txt
 Step 2
 then install the protobuffer compiler and runtime bindings for your system.
 Linux = sudo apt install protobuf-compiler
